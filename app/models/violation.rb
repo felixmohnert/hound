@@ -21,6 +21,10 @@ class Violation < ActiveRecord::Base
     line.changed?
   end
 
+  def messages_count
+    messages.size
+  end
+
   private
 
   attr_reader :line

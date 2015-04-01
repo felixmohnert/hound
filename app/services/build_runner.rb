@@ -80,7 +80,7 @@ class BuildRunner
     github.create_success_status(
       payload.full_repo_name,
       payload.head_sha,
-      I18n.t(:success_status)
+      I18n.t(:success_status, count: violation_count)
     )
   end
 
@@ -108,5 +108,9 @@ class BuildRunner
 
   def configuration_url
     Rails.application.routes.url_helpers.configuration_url(host: ENV["HOST"])
+  end
+
+  def violation_count
+    violations.sum(&:messages_count)
   end
 end
